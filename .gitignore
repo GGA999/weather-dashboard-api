@@ -1,0 +1,47 @@
+# Dipendenze e pacchetti
+node_modules/
+jspm_packages/
+web_modules/
+
+# Cartelle di compilazione e build
+dist/
+build/
+.next/
+.nuxt/
+
+# File di ambiente e credenziali (Segreti)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# File di log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# File di sistema ed editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Testing
+coverage/
+.nyc_output/
+
+# Prisma
+/prisma/migrations/
+
+backend/node_modules/
+backend/.env
+

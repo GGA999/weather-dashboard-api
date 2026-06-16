@@ -42,13 +42,13 @@ router.get("/forecast", async (req, res, next) => {
     if (Number.isNaN(lat) || lat < -90 || lat > 90) {
       return res.status(400).json({
         error: "Il parametro 'lat' deve essere un numero compreso tra -90 e 90."
-      }); // <-- ERANO SALTATE QUESTE CHIUSURE
+      });
     }
 
     if (Number.isNaN(lon) || lon < -180 || lon > 180) {
       return res.status(400).json({
         error: "Il parametro 'lon' deve essere un numero compreso tra -180 e 180."
-      }); // <-- ERANO SALTATE QUESTE CHIUSURE
+      });
     }
 
     // riceve coordinate valide per chiamata servizio

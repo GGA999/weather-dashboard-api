@@ -54,11 +54,11 @@ router.get("/forecast", async (req, res, next) => {
     // riceve coordinate valide per chiamata servizio
     const rawData = await getForecast(lat, lon);
 
-    // passa il JSON grezzo alla funzione di normalizzazione per restituire un oggetto più semplice e leggibile
-    const forecast = normalizeForecastData(rawData);
+    // allinea la risposta al contratto usato dal frontend
+    const weatherData = normalizeForecastData(rawData);
 
-    // restituisce il risultato al client
-    res.status(200).json({ forecast });
+    // restituisce condizioni correnti, ore successive e cinque giorni
+    res.status(200).json(weatherData);
 
   } catch (error) {
     next(error);

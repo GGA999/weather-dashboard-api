@@ -116,7 +116,8 @@ export const searchLocations = async (query) => {
     latitude: loc.latitude,
     longitude: loc.longitude,
     country: loc.country,
-    admin1: loc.admin1,
+    countryCode: loc.country_code || loc.countryCode || "",
+    state: loc.admin1 || loc.admin2 || null,
     timezone: loc.timezone,
   }));
 };
@@ -137,8 +138,11 @@ export const getForecast = async (lat, lon) => {
     latitude: String(lat),
     longitude: String(lon),
     daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max",
+    hourly: "temperature_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m,relative_humidity_2m,surface_pressure,is_day",
+    current: "temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure,is_day",
     timezone: "auto",
-    forecast_days: "5"
+    forecast_days: "5",
+    past_days: "0",
   });
 
   const data = await fetchForecastData(

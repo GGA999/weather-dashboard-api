@@ -32,7 +32,7 @@ Il motore backend per la Dashboard Meteo. Si tratta di un'applicazione RESTful A
 * **`GET /api/weather/locations`**
   * **Descrizione**: Cerca ed elenca i luoghi geografici corrispondenti alla query specificata.
   * **Parametri Query**: `q` (stringa, minimo 2 caratteri).
-  * **Output (200 OK)**: `{"locations": [ { "id": 123, "name": "Roma", "latitude": 41.89, "longitude": 12.51 }, ... ]}`
+  * **Output (200 OK)**: `{"locations": [ { "id": 123, "name": "Roma", "state": "Lazio", "country": "Italia", "countryCode": "IT", "latitude": 41.89, "longitude": 12.51, "timezone": "Europe/Rome" }, ... ]}`
   * **Codici Errore**: 
     * `400 Bad Request` (input non valido o inferiore alla lunghezza minima).
     * `502 Bad Gateway` (errore di comunicazione con il provider meteo esterno).
@@ -41,7 +41,48 @@ Il motore backend per la Dashboard Meteo. Si tratta di un'applicazione RESTful A
 * **`GET /api/weather/forecast`**
   * **Descrizione**: Recupera le condizioni meteo attuali e le previsioni per i successivi 5 giorni relative a una specifica coordinata.
   * **Parametri Query**: `lat` (numerico), `lon` (numerico).
-  * **Output (200 OK)**: Dettaglio della località combinato con l'array dei 5 giorni di previsione.
+  * **Output (200 OK)**:
+```json
+{
+  "current": {
+    "time": "2026-06-18T14:15",
+    "temperature": 27.2,
+    "apparentTemperature": 28.1,
+    "humidity": 51,
+    "pressure": 1008.7,
+    "windSpeed": 12.4,
+    "weatherCode": 1,
+    "description": "Prevalentemente sereno",
+    "isDay": true
+  },
+  "hourly": [
+    {
+      "time": "2026-06-18T14:00",
+      "temperature": 27,
+      "apparentTemperature": 28.1,
+      "precipitationProbability": 10,
+      "weatherCode": 1,
+      "description": "Prevalentemente sereno",
+      "isDay": true,
+      "windSpeed": 12.4,
+      "humidity": 51,
+      "pressure": 1008.7
+    }
+  ],
+  "forecast": [
+    {
+      "date": "2026-06-18",
+      "weatherCode": 1,
+      "description": "Prevalentemente sereno",
+      "temperatureMin": 18,
+      "temperatureMax": 29,
+      "precipitationProbability": 10,
+      "windSpeed": 14
+    }
+  ]
+}
+```
+  * `forecast` contiene sempre esattamente 5 elementi; `hourly` parte dall'ora corrente e contiene fino a 24 ore.
   * **Codici Errore**:
     * `400 Bad Request` (latitudine o longitudine mancanti o in formato non numerico).
     * `502 Bad Gateway` (errore di risposta del provider meteo terzo).

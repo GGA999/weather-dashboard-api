@@ -1,6 +1,6 @@
 # Weather Dashboard API
 
-Il motore backend per la Dashboard Meteo. Si tratta di un'applicazione RESTful API sviluppata con Node.js ed Express, progettata per integrarsi con provider meteo esterni, normalizzare i dati e servirli in modo efficiente al frontend.
+Si tratta di un'applicazione RESTful API sviluppata con Node.js ed Express, progettata per integrarsi con provider meteo esterni, normalizzare i dati e servirli in modo efficiente al frontend.
 
 ---
 
